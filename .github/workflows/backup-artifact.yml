@@ -1,0 +1,22 @@
+name: Intelectus Official Backup Transfer
+on:
+  push:
+    branches: [main]
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload official backup package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Intelectus_Aplicativos_Oficiais_2026-09-17
+          path: |
+            Intelectus_matematica_PRODUCAO_2026-09-17.zip
+            Intelectus_alfabetizacao_PRODUCAO_2026-09-17.zip
+            Intelectus_tabuada_PRODUCAO_2026-09-17.zip
+            Intelectus_desafio_prepara_PRODUCAO_2026-09-17.zip
+            MASTER_MANIFEST.json
+            README.txt
+          retention-days: 1
+          compression-level: 0
