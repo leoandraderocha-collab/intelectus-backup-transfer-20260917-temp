@@ -1,4 +1,4 @@
-name: Intelectus Official Backup Transfer
+name: Intelectus Encrypted Backup Transfer
 on:
   push:
     branches: [main]
@@ -7,16 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Upload official backup package
+      - name: Upload encrypted official backup
         uses: actions/upload-artifact@v4
         with:
-          name: Intelectus_Aplicativos_Oficiais_2026-09-17
+          name: Intelectus_Aplicativos_Oficiais_2026-09-17_ENCRYPTED
           path: |
-            Intelectus_matematica_PRODUCAO_2026-09-17.zip
-            Intelectus_alfabetizacao_PRODUCAO_2026-09-17.zip
-            Intelectus_tabuada_PRODUCAO_2026-09-17.zip
-            Intelectus_desafio_prepara_PRODUCAO_2026-09-17.zip
-            MASTER_MANIFEST.json
-            README.txt
+            intelectus-apps-official-20260917.tar.gz.enc
+            SHA256SUMS.txt
+            RECOVERY.txt
           retention-days: 1
           compression-level: 0

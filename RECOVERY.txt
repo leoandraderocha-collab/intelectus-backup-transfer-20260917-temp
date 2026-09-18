@@ -1,0 +1,4 @@
+Temporary encrypted transfer package for Intelectus official application backups.
+The encrypted archive contains the official production backups of Matemática, Alfabetização, Tabuada and Desafio Prepara+, plus manifests.
+Cipher: AES-256-CBC, PBKDF2, 200000 iterations.
+The recovery passphrase is NOT stored in this repository.
