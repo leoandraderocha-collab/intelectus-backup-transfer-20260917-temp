@@ -1,4 +1,4 @@
-name: Intelectus Encrypted Backup Transfer
+name: Intelectus Official Product Backups
 on:
   push:
     branches: [main]
@@ -7,13 +7,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Upload encrypted official backup
-        uses: actions/upload-artifact@v4
+      - name: Decrypt master transfer archive
+        env:
+          TRANSFER_PASSPHRASE: ${{ secrets.TRANSFER_PASSPHRASE }}
+        run: |
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 \
+            -in intelectus-apps-official-20260917.tar.gz.enc \
+            -out /tmp/intelectus-apps-official.tar.gz \
+            -pass env:TRANSFER_PASSPHRASE
+          mkdir -p /tmp/official
+          tar -xzf /tmp/intelectus-apps-official.tar.gz -C /tmp/official
+          mkdir -p /tmp/matematica /tmp/alfabetizacao /tmp/tabuada /tmp/desafio
+          unzip -q /tmp/official/Intelectus_matematica_PRODUCAO_2026-09-17.zip -d /tmp/matematica
+          unzip -q /tmp/official/Intelectus_alfabetizacao_PRODUCAO_2026-09-17.zip -d /tmp/alfabetizacao
+          unzip -q /tmp/official/Intelectus_tabuada_PRODUCAO_2026-09-17.zip -d /tmp/tabuada
+          unzip -q /tmp/official/Intelectus_desafio_prepara_PRODUCAO_2026-09-17.zip -d /tmp/desafio
+          cp /tmp/official/MASTER_MANIFEST.json /tmp/MASTER_MANIFEST.json
+          cp /tmp/official/README.txt /tmp/README.txt
+      - uses: actions/upload-artifact@v4
         with:
-          name: Intelectus_Aplicativos_Oficiais_2026-09-17_ENCRYPTED
-          path: |
-            intelectus-apps-official-20260917.tar.gz.enc
-            SHA256SUMS.txt
-            RECOVERY.txt
+          name: Intelectus_Matematica_PRODUCAO_OFICIAL_2026-09-17
+          path: /tmp/matematica/
           retention-days: 1
-          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Intelectus_Alfabetizacao_PRODUCAO_OFICIAL_2026-09-17
+          path: /tmp/alfabetizacao/
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Intelectus_Tabuada_PRODUCAO_OFICIAL_2026-09-17
+          path: /tmp/tabuada/
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Intelectus_Desafio_PreparaMais_PRODUCAO_OFICIAL_2026-09-17
+          path: /tmp/desafio/
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Intelectus_MASTER_MANIFEST_2026-09-17
+          path: |
+            /tmp/MASTER_MANIFEST.json
+            /tmp/README.txt
+          retention-days: 1
