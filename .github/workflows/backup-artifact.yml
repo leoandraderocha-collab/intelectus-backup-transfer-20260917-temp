@@ -29,21 +29,25 @@ jobs:
           name: Intelectus_Matematica_PRODUCAO_OFICIAL_2026-09-17
           path: /tmp/matematica/
           retention-days: 1
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         with:
           name: Intelectus_Alfabetizacao_PRODUCAO_OFICIAL_2026-09-17
           path: /tmp/alfabetizacao/
           retention-days: 1
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         with:
           name: Intelectus_Tabuada_PRODUCAO_OFICIAL_2026-09-17
           path: /tmp/tabuada/
           retention-days: 1
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         with:
           name: Intelectus_Desafio_PreparaMais_PRODUCAO_OFICIAL_2026-09-17
           path: /tmp/desafio/
           retention-days: 1
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         with:
           name: Intelectus_MASTER_MANIFEST_2026-09-17
@@ -51,3 +55,4 @@ jobs:
             /tmp/MASTER_MANIFEST.json
             /tmp/README.txt
           retention-days: 1
+          include-hidden-files: true
